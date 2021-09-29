@@ -5,6 +5,7 @@
  */
 package com.gmail.joseifpb.etarefas.service;
 
+import com.gmail.joseifpb.etarefas.entity.Status;
 import com.gmail.joseifpb.etarefas.entity.User;
 import com.gmail.joseifpb.etarefas.repository.UserRepository;
 import com.gmail.joseifpb.etarefas.util.ValidEmail;
@@ -26,7 +27,8 @@ public class UserServiceImpl implements UserService {
         if (!ValidEmail.isValidEmailAddressRegex(user.getEmail())) {
             return null;
         } else {
-            user.setPasswordl(Criptografar.hashPassword(user.getPasswordl()));
+            user.setPassword(Criptografar.hashPassword(user.getPassword()));
+            user.setStatus(Status.Disabled);
             return userRepository.save(user);
         }
     }

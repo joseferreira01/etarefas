@@ -33,15 +33,10 @@ public class UserController implements Serializable {
 
     public String save() {
         try {
-             System.err.println("save " + user.getName());
-        this.user.setEmail("exemplo@gmail.com");
-        this.user.setPasswordl("12341234");
-        this.user.setStatus(Status.Active);
-        this.userService.save(user);
-        this.user = new User();
+            this.userService.save(user);
+            this.user = new User();
         } catch (Exception e) {
-            System.err.println("deu erro");
-             return null;
+            return null;
         }
         return null;
     }

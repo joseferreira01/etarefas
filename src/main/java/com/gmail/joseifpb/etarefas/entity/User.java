@@ -30,7 +30,7 @@ public class User implements Serializable {
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false, length = 200)
-    private String passwordl;
+    private String password;
     @Column(nullable = false)
      @Enumerated(EnumType.STRING)
     private Status status;
@@ -74,12 +74,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getPasswordl() {
-        return passwordl;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordl(String passwordl) {
-        this.passwordl = passwordl;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Status getStatus() {
@@ -113,7 +113,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", email=" + email + ", passwordl=" + passwordl + '}';
+        return "User{" + "id=" + id + ", name=" + name + ", email=" + email + ", passwordl=" + password + '}';
     }
 
 }

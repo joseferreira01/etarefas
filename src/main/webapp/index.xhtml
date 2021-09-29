@@ -8,9 +8,15 @@
     <h:body>
         Hello from Facelets
         <h:form id="id-forme">
-        <h:inputText value="#{userController.user.name}"/>
+      Nome  <h:inputText value="#{userController.user.name}"/>
+        <br/>
+      email  <h:inputText value="#{userController.user.email}"/>
+         <br/>
+       senha <h:inputText value="#{userController.user.password}"/>
+         <br/>
         <h:commandButton action="#{userController.save()}" value="Salvar"/>
         </h:form>
+         <br/>  <br/>
     </h:body>
 </html>
 
