@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gmail.joseifpb.etarefas.entity;
+package com.gmail.joseifpb.etarefas.service;
+
+import com.gmail.joseifpb.etarefas.entity.User;
 
 /**
  *

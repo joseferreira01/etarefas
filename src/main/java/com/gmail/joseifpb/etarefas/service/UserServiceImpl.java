@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gmail.joseifpb.etarefas.entity;
+package com.gmail.joseifpb.etarefas.service;
 
+import com.gmail.joseifpb.etarefas.entity.User;
 import com.gmail.joseifpb.etarefas.repository.UserRepository;
 import com.gmail.joseifpb.etarefas.util.ValidEmail;
 import javax.ejb.EJB;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
         if (!ValidEmail.isValidEmailAddressRegex(user.getEmail())) {
             return null;
         } else {
+            user.setPasswordl(Criptografar.hashPassword(user.getPasswordl()));
             return userRepository.save(user);
         }
     }
