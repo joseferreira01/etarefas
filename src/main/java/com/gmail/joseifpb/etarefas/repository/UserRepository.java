@@ -14,13 +14,13 @@ import java.util.List;
  */
 public interface UserRepository {
 
-    User find(int id);
+    User find(Long id);
 
     User findByEmail(String email);
 
     List<User> findAll();
 
-    void remove(int id);
+    void remove(Long id);
 
     User save(User user);
 

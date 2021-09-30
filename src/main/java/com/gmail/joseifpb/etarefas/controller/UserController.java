@@ -5,7 +5,6 @@
  */
 package com.gmail.joseifpb.etarefas.controller;
 
-import com.gmail.joseifpb.etarefas.entity.Status;
 import com.gmail.joseifpb.etarefas.entity.User;
 import com.gmail.joseifpb.etarefas.service.UserService;
 import java.io.Serializable;

@@ -6,6 +6,7 @@
 package com.gmail.joseifpb.etarefas.service;
 
 import com.gmail.joseifpb.etarefas.entity.User;
+import java.util.List;
 
 /**
  *
@@ -16,5 +17,10 @@ public interface UserService {
     User save(User user);
 
     User login(String email, String password);
+
+    User findOn(Long id);
+
+    List<User> index();
+    boolean delete(Long id);
 
 }

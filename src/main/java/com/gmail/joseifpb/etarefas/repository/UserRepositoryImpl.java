@@ -35,19 +35,21 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User find(int id) {
-        return em.find(User.class, id);
+    public User find(Long id) {
+        User u = em.find(User.class, id);
+        u.setPassword("");
+        return u;
     }
 
     @Override
     public List<User> findAll() {
       
-        return em.createQuery("select u from User ", User.class).getResultList();
+        return em.createQuery("select u from tb_user AS u ", User.class).getResultList();
 
     }
 
     @Override
-    public void remove(int id) {
+    public void remove(Long id) {
         User u = find(id);
         em.remove(u);
     }

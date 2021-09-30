@@ -9,6 +9,7 @@ import com.gmail.joseifpb.etarefas.entity.User;
 import com.gmail.joseifpb.etarefas.service.UserService;
 import com.gmail.joseifpb.etarefas.util.Message;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -43,6 +44,7 @@ public class SessionContrler implements Serializable {
                     getSessionMap().
                     put("users", user.getId());
             this.message.addMessage("Bem vindo " + user.getName() + "!");
+          
             return "user/home";
         }
          this.message.addMessage("Erro: verifique os dados e tente novamente ");
