@@ -33,4 +33,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public User login(String email, String password) {
+        User user = this.userRepository.findByEmail(email);
+        System.err.println("logim ser  "+user.toString());
+         if (user != null && user.getPassword().equals( Criptografar.hashPassword(password))) {
+             System.out.println("com.gmail.joseifpb.etarefas.service.UserServiceImpl.login()"+user.getId());
+            return user;
+        } else {
+            return User.fake();
+        }
+    }
+    
+
 }

@@ -17,6 +17,14 @@
         <h:commandButton action="#{userController.save()}" value="Salvar"/>
         </h:form>
          <br/>  <br/>
+           <h:form id="id-forme-login">
+   
+      email  <h:inputText value="#{sessionContrler.user.email}"/>
+         <br/>
+       senha <h:inputText value="#{sessionContrler.user.password}"/>
+         <br/>
+         <h:commandButton action="#{sessionContrler.login()}" value="login"/>
+        </h:form>
     </h:body>
 </html>
 

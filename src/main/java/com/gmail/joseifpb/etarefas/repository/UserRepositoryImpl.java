@@ -28,9 +28,8 @@ public class UserRepositoryImpl implements UserRepository {
         try {
             u = em.merge(user);
         } catch (Exception e) {
-            System.out.println("erro");
-
-            return User.fake();
+            
+            return u;
         }
         return u;
     }
@@ -42,7 +41,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        System.err.println("to no list repo");
+      
         return em.createQuery("select u from User ", User.class).getResultList();
 
     }
@@ -55,10 +54,13 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findByEmail(String email) {
-        Query query = em.createQuery("SELECT * FROM u User whare u.email = email");
-        query.setParameter("email", email);
-        User user = (User) query.getSingleResult();
-        return user;
+        
+        Query query = em.createNativeQuery("SELECT * FROM  tb_user u  where u.email =?",User.class);
+        query.setParameter(1, email);
+        List<User> user = query.getResultList();
+       
+      
+        return user.get(0);
     }
 
 }
