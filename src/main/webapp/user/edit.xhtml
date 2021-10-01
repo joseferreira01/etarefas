@@ -8,10 +8,18 @@
                 template="../template.xhtml">
     <ui:define name="centro">
         <h:messages layout="list"/>
-        task
-        <h:form>
-          
+      <h:form id="id-forme-login">
+            <h:messages layout="list" />
+            <h:outputLabel for="nome" value="Nome" />
+            <h:inputText value="#{userController.user.name}"/>
+            <h:outputLabel for="email" value="email" />
+            <h:inputText value="#{userController.user.email}"/>
+            <h:outputLabel for="password" value="senha" />
+            <h:inputSecret value="#{userController.user.password}"/> 
+            <br/>
+            <h:commandButton  style="margin-left: 40px; "  id="comando" styleClass="btn" action="#{userController.save()}" value="login"/>
         </h:form>
+        <br/>
     </ui:define>
 </ui:composition>
 
