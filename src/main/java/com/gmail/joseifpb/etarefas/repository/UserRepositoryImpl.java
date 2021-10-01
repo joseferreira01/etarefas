@@ -37,7 +37,6 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User find(Long id) {
         User u = em.find(User.class, id);
-        u.setPassword("");
         return u;
     }
 

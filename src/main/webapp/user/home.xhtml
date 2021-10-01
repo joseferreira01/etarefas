@@ -7,6 +7,17 @@
     </h:head>
     <h:body>
         Hello Home
+          <br/>  <br/>
+           <h:form id="id-forme-task">
+   
+               titulo  <h:inputText value="#{taskContrller.task.title}"/>
+         <br/>
+         Descrição <h:inputText value="#{taskContrller.task.description}"/>
+           <br/>  
+         Data <h:inputText value="#{taskContrller.date}"/>
+         <br/>
+         <h:commandButton action="#{taskContrller.save()}" value="Salva tarefa"/>
+        </h:form>
     </h:body>
 </html>
 
