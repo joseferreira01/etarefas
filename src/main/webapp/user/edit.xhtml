@@ -7,17 +7,10 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="../template.xhtml">
     <ui:define name="centro">
-       
+        <h:messages layout="list"/>
+        task
         <h:form>
-            <h:messages layout="list"/>
-            <h:outputLabel for="Name" value="Nome" />
-            <h:inputText value="#{userController.user.name}" id="nome"/>
-            <h:outputLabel for="Email" value="Email" />
-            <h:inputText value="#{userController.user.email}"></h:inputText>
-            <h:outputLabel for="Password" value="Senha" />
-            <h:inputSecret value="#{userController.user.password}"/> 
-            <h:commandButton class="btn" value="adicionar" action="#{userController.save()}"/>
-
+          
         </h:form>
     </ui:define>
 </ui:composition>
