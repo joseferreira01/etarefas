@@ -44,6 +44,7 @@ public class SessionContrler implements Serializable {
                     getSessionMap().
                     put("users", user.getId());
             this.message.addMessage("Bem vindo " + user.getName() + "!");
+            this.user = new User();
           
             return "user/home";
         }

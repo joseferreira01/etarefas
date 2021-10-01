@@ -37,7 +37,7 @@ public class UserController implements Serializable {
         } catch (Exception e) {
             return null;
         }
-        return null;
+        return "/faces/index";
     }
 
     public UserService getUserService() {
