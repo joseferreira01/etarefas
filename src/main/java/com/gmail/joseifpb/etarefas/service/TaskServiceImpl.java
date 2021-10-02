@@ -5,12 +5,8 @@
  */
 package com.gmail.joseifpb.etarefas.service;
 
-import com.gmail.joseifpb.etarefas.entity.Status;
 import com.gmail.joseifpb.etarefas.entity.Task;
-import com.gmail.joseifpb.etarefas.entity.User;
 import com.gmail.joseifpb.etarefas.repository.TaskRepository;
-import com.gmail.joseifpb.etarefas.repository.UserRepository;
-import com.gmail.joseifpb.etarefas.util.ValidEmail;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.EJB;
@@ -27,8 +23,16 @@ public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
 
     @Override
-    public Task save(Task task) {
-        return taskRepository.save(task);
+    public boolean save(Task task, Long user_id_session) {
+        System.out.println("sava "+task.getId());
+        try {
+            if (task.getId()==null || task.getId() < 1L) {
+                taskRepository.save(task);
+                return true;
+            } else return upTask(task,user_id_session);
+        } catch (Exception e) {
+            return false;
+        }
 
     }
 
@@ -64,14 +68,30 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public boolean delete(Long itask_d, Long maker_id) {
         try {
-            if (maker_id.equals( findOn(itask_d).getUsermaker().getId())) {
+            if (maker_id.equals(findOn(itask_d).getUsermaker().getId())) {
                 this.taskRepository.remove(itask_d);
                 return true;
+            } else {
+                return false;
             }
-            else return false;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    private boolean upTask(Task task, Long user_id_session) {
+        try {
+             Task originalTask = findOn(task.getId());
+             if(originalTask!=null && originalTask.
+                     getUsermaker().getId().
+                     equals(user_id_session)){
+                 this.taskRepository.save(task);
+            return true;
+        }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
     }
 
 }

@@ -12,6 +12,7 @@ import com.gmail.joseifpb.etarefas.entity.User;
 import com.gmail.joseifpb.etarefas.service.TaskService;
 import com.gmail.joseifpb.etarefas.service.UserService;
 import com.gmail.joseifpb.etarefas.util.Message;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,7 +21,9 @@ import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.PostActivate;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
@@ -31,8 +34,8 @@ import javax.inject.Named;
  * @author jose
  */
 @Named
-@RequestScoped
-public class TaskContrller {
+@SessionScoped
+public class TaskContrller implements Serializable{
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
     private String date;
@@ -52,7 +55,7 @@ public class TaskContrller {
     @PostConstruct
     public void init() {
         this.users = new ArrayList<>();
-        this.task = new Task();
+            this.task = new Task();
     }
 
     public String save() {
@@ -62,17 +65,21 @@ public class TaskContrller {
             this.task.setUsermaker(userService.findOn(userSession()));
             this.task.setDeadline(LocalDate.parse(date, formatter));
             searchResponsible();
-            this.taskService.save(this.task);
+            this.taskService.save(this.task,userSession());
             this.task = new Task();
+            this.date= "";
             return "list";
         } catch (Exception e) {
             return null;
         }
     }
 
-    public String edit(Task task) {
+    public String edit(Task task) {       
         this.task = task;
-        return "edit";
+        this.responsavel = task.getResponsible().getName();
+        this.date = task.getDateFormat();
+        
+        return "edit"; 
     }
 
     public String remove(Long task_id) {
