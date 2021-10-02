@@ -20,6 +20,6 @@ public interface TaskService {
 
     List<Task> index();
 
-    boolean delete(Long id);
+    boolean delete(Long itask_d,Long maker_id);
 
 }

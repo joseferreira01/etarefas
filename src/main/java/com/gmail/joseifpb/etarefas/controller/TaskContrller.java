@@ -11,6 +11,7 @@ import com.gmail.joseifpb.etarefas.entity.TtaskStatus;
 import com.gmail.joseifpb.etarefas.entity.User;
 import com.gmail.joseifpb.etarefas.service.TaskService;
 import com.gmail.joseifpb.etarefas.service.UserService;
+import com.gmail.joseifpb.etarefas.util.Message;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -44,6 +46,8 @@ public class TaskContrller {
     private TaskService taskService;
     @EJB
     private UserService userService;
+    @Inject
+    private Message message;
 
     @PostConstruct
     public void init() {
@@ -65,14 +69,24 @@ public class TaskContrller {
             return null;
         }
     }
-    public String edit(Task task){
+
+    public String edit(Task task) {
         this.task = task;
         return "edit";
     }
-    
-    public String remove(Long id){
-        this.taskService.delete(id);
-        return null;
+
+    public String remove(Long task_id) {
+        try {
+            boolean result = this.taskService.delete(task_id, userSession());
+            System.out.println("redete task "+result);
+            if (!result) {
+                this.message.addMessage("Somente o criador da tarefa pode excluir-la");
+            }
+            return null;
+        } catch (Exception e) {
+            this.message.addMessage("Erro verifique os dados e tente novamente");
+            return null;
+        }
     }
 
     public String getDate() {
@@ -100,7 +114,7 @@ public class TaskContrller {
     }
 
     public List<Task> getTasks() {
-       this.tasks = this.taskService.index();
+        this.tasks = this.taskService.index();
         return tasks;
     }
 

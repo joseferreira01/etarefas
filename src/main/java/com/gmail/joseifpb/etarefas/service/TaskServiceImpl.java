@@ -28,8 +28,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task save(Task task) {
-            return taskRepository.save(task);
-        
+        return taskRepository.save(task);
+
     }
 
     @Override
@@ -48,7 +48,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<Task> index() {
-        
+
         try {
             List<Task> result = this.taskRepository.findAll();
             if (result.isEmpty()) {
@@ -62,10 +62,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public boolean delete(Long id) {
+    public boolean delete(Long itask_d, Long maker_id) {
         try {
-            this.taskRepository.remove(id);
-            return true;
+            if (maker_id.equals( findOn(itask_d).getUsermaker().getId())) {
+                this.taskRepository.remove(itask_d);
+                return true;
+            }
+            else return false;
         } catch (Exception e) {
             return false;
         }
