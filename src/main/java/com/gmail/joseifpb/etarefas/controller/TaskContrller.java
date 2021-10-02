@@ -78,7 +78,6 @@ public class TaskContrller {
     public String remove(Long task_id) {
         try {
             boolean result = this.taskService.delete(task_id, userSession());
-            System.out.println("redete task "+result);
             if (!result) {
                 this.message.addMessage("Somente o criador da tarefa pode excluir-la");
             }
