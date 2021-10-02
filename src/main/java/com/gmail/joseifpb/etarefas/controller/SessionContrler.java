@@ -46,7 +46,7 @@ public class SessionContrler implements Serializable {
             this.message.addMessage("Bem vindo " + user.getName() + "!");
             this.user = new User();
           
-            return "user/home";
+            return "task/list";
         }
          this.message.addMessage("Erro: verifique os dados e tente novamente ");
         return null;
