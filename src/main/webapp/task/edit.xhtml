@@ -11,8 +11,21 @@
     <ui:define name="centro">
         ssssssss
         <br/>
-        <h:form>
-              
+        <h:messages layout="list"/>
+        <h:form id="id-forme-login">
+            <h:messages layout="list" />
+            <h:outputLabel for="title" value="Titulo" />
+            <h:inputText value="#{taskContrller.task.title}"/>
+            <h:outputLabel for="descripition" value="descrição" />
+            <h:inputText value="#{taskContrller.task.description}"/>
+            <h:outputLabel for="dedline" value="Data de entrega" />
+            <h:inputText value="#{taskContrller.date}"/> 
+           <h:outputText value="Prioridade"/>
+           <h:selectOneMenu value="#{taskContrller.priority}">
+                <f:selectItems value="#{taskContrller.prioridades}"/>
+            </h:selectOneMenu>
+            <br/>
+            <h:commandButton  style="margin-left: 40px; "  id="comando" styleClass="btn" action="#{taskContrller.save()}" value="Salvar"/>
         </h:form>
     </ui:define>
 </ui:composition>

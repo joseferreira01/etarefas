@@ -35,11 +35,9 @@ public class AutorizacaoFilter implements Filter {
         Long user = null;
         if (request.getRequestURI().endsWith("/faces/index.xhtml")
                 || request.getRequestURI().endsWith("/faces/user/edit.xhtml")
-               
-                
                 || request.getRequestURI()
                 .contains("/javax.faces.img/")) {
-            // System.err.println("no if filter");
+             System.err.println("no if filter");
             chain.doFilter(req, res);
             // System.err.println("index filtro");
         } else {

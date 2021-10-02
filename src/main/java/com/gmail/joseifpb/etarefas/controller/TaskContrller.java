@@ -8,7 +8,6 @@ package com.gmail.joseifpb.etarefas.controller;
 import com.gmail.joseifpb.etarefas.entity.Priority;
 import com.gmail.joseifpb.etarefas.entity.Task;
 import com.gmail.joseifpb.etarefas.entity.TtaskStatus;
-import com.gmail.joseifpb.etarefas.entity.User;
 import com.gmail.joseifpb.etarefas.service.TaskService;
 import com.gmail.joseifpb.etarefas.service.UserService;
 import java.time.LocalDate;
@@ -18,6 +17,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
 /**
@@ -30,6 +30,7 @@ public class TaskContrller {
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
     private String date;
+    private String priority;
 
     private Task task;
     private List<Task> tasks;
@@ -45,7 +46,8 @@ public class TaskContrller {
 
     public String save() {
         this.task.setStatus(TtaskStatus.Andamento);
-        this.task.setPriority(Priority.Low);
+        System.out.println(priority);
+        this.task.setPriority(Priority.valueOf(priority));
         this.task.setUsermaker(userService.findOn(userSession()));
         this.task.setResponsible(userService.findOn(userSession()));
         this.task.setDeadline(LocalDate.parse(date, formatter));
@@ -61,6 +63,13 @@ public class TaskContrller {
 
     public void setDate(String date) {
         this.date = date;
+    }
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 
     public Task getTask() {
@@ -83,4 +92,18 @@ public class TaskContrller {
         Long User = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("users");
         return User;
     }
+     private SelectItem[] prioridades = {
+    new SelectItem(Priority.High),
+    new SelectItem(Priority.Low),
+    new SelectItem(Priority.Medium)
+  };
+
+    public void setPrioridades(SelectItem[] prioridades) {
+        this.prioridades = prioridades;
+    }
+
+    public SelectItem[] getPrioridades() {
+        return prioridades;
+    }
+     
 }
