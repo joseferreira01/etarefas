@@ -6,6 +6,7 @@
 package com.gmail.joseifpb.etarefas.service;
 
 import com.gmail.joseifpb.etarefas.entity.Task;
+import com.gmail.joseifpb.etarefas.entity.TtaskStatus;
 import com.gmail.joseifpb.etarefas.repository.TaskRepository;
 import java.util.Collections;
 import java.util.List;
@@ -24,12 +25,14 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public boolean save(Task task, Long user_id_session) {
-        System.out.println("sava "+task.getId());
+        System.out.println("sava " + task.getId());
         try {
-            if (task.getId()==null || task.getId() < 1L) {
+            if (task.getId() == null || task.getId() < 1L) {
                 taskRepository.save(task);
                 return true;
-            } else return upTask(task,user_id_session);
+            } else {
+                return upTask(task, user_id_session);
+            }
         } catch (Exception e) {
             return false;
         }
@@ -81,13 +84,28 @@ public class TaskServiceImpl implements TaskService {
 
     private boolean upTask(Task task, Long user_id_session) {
         try {
-             Task originalTask = findOn(task.getId());
-             if(originalTask!=null && originalTask.
-                     getUsermaker().getId().
-                     equals(user_id_session)){
-                 this.taskRepository.save(task);
-            return true;
+            Task originalTask = findOn(task.getId());
+            if (originalTask != null && originalTask.
+                    getUsermaker().getId().
+                    equals(user_id_session)) {
+                this.taskRepository.save(task);
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
         }
+        return false;
+    }
+
+    @Override
+    public boolean markAsCompleted(Long task_id, Long user_id_session) {
+        try {
+            Task task = findOn(task_id);
+            if (task != null && task.getResponsible().getId().equals(user_id_session)) {
+                task.setStatus(TtaskStatus.Concluída);
+                this.taskRepository.save(task);
+                return true;
+            }
         } catch (Exception e) {
             return false;
         }

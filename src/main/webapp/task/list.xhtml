@@ -23,16 +23,25 @@
                     <f:facet name="header">Responsaqvel</f:facet>
                     #{task.responsible.name}
                 </h:column>
+                 <h:column>
+                    <f:facet name="header">Status</f:facet>
+                    #{task.status}
+                </h:column>
                 <h:column> 
                     <f:facet name="header">Entrega</f:facet>
                     #{task.dateFormat}
                 </h:column>
-                <h:column>
-                    <h:commandButton value="x" action="#{taskContrller.remove(task.id)}" class="btn"/>
+                 <h:column>
+                    
+                     <h:commandButton disabled="#{task.responsible.id!=taskContrller.userSession()}" value="Concluída  ✅" action="#{taskContrller.changeTaskStatus(task.id)}" class="btn"/>
                 </h:column>
                 <h:column>
                     
-                    <h:commandButton value="editar" action="#{taskContrller.edit(task)}" class="btn"/>
+                    <h:commandButton disabled="#{task.usermaker.id!=taskContrller.userSession()}" value="x" action="#{taskContrller.remove(task.id)}" class="btn"/>
+                </h:column>  
+                <h:column>
+                    
+                    <h:commandButton disabled="#{task.usermaker.id!=taskContrller.userSession()}" value="editar" action="#{taskContrller.edit(task)}" class="btn"/>
                 </h:column>
                
                  

@@ -14,12 +14,14 @@ import java.util.List;
  */
 public interface TaskService {
 
-    boolean save(Task task,Long user_id_session);
+    boolean save(Task task, Long user_id_session);
 
     Task findOn(Long id);
 
     List<Task> index();
 
-    boolean delete(Long itask_d,Long maker_id);
+    public boolean markAsCompleted(Long task_id, Long user_id_session);
+
+    boolean delete(Long itask_d, Long maker_id);
 
 }

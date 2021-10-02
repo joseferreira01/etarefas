@@ -35,7 +35,7 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class TaskContrller implements Serializable{
+public class TaskContrller implements Serializable {
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
     private String date;
@@ -55,7 +55,7 @@ public class TaskContrller implements Serializable{
     @PostConstruct
     public void init() {
         this.users = new ArrayList<>();
-            this.task = new Task();
+        this.task = new Task();
     }
 
     public String save() {
@@ -65,21 +65,21 @@ public class TaskContrller implements Serializable{
             this.task.setUsermaker(userService.findOn(userSession()));
             this.task.setDeadline(LocalDate.parse(date, formatter));
             searchResponsible();
-            this.taskService.save(this.task,userSession());
+            this.taskService.save(this.task, userSession());
             this.task = new Task();
-            this.date= "";
+            this.date = "";
             return "list";
         } catch (Exception e) {
             return null;
         }
     }
 
-    public String edit(Task task) {       
+    public String edit(Task task) {
         this.task = task;
         this.responsavel = task.getResponsible().getName();
         this.date = task.getDateFormat();
-        
-        return "edit"; 
+
+        return "edit";
     }
 
     public String remove(Long task_id) {
@@ -128,7 +128,7 @@ public class TaskContrller implements Serializable{
         this.tasks = tasks;
     }
 
-    private Long userSession() {
+    public Long userSession() {
         Long User = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("users");
         return User;
     }
@@ -174,6 +174,17 @@ public class TaskContrller implements Serializable{
             }
         }
         return User.fake();
+    }
+
+    public String changeTaskStatus(Long task_id) {
+        try {
+
+            this.taskService.markAsCompleted(task_id, userSession());
+        } catch (Exception e) {
+            this.message.addMessage("Erro tente novamente");
+            return null;
+        }
+        return null;
     }
 
 }
