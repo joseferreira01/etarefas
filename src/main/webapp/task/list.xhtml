@@ -7,7 +7,11 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="../template.xhtml">
     <ui:define name="centro">
-         <h:messages layout="list"/>
+        <h:messages showDetail="true" layout="list"/>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
         <h:form>
             <h:commandLink class="btn" value="nova" action="edit.xhtml?faces-redirect=true"/>
             <h:dataTable var="task" value="#{taskContrller.tasks}" class="striped highlight">

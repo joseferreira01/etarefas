@@ -22,6 +22,8 @@ public interface TaskService {
 
     public boolean markAsCompleted(Long task_id, Long user_id_session);
 
+    public boolean validateTask(Task task);
+
     boolean delete(Long itask_d, Long maker_id);
 
 }

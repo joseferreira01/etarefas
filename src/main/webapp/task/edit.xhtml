@@ -9,10 +9,10 @@
 
 
     <ui:define name="centro">
-        ssssssss
+        
         <br/>
-        <h:messages layout="list"/>
-        <h:form id="id-forme-task">
+        <h:messages layout="list" style="padding: -10%"/>
+        <h:form id="id-forme-task" style=" margin-top:39px ;padding: -10%; height: 800px; position: ">
             <h:messages layout="list" />
             <h:outputLabel for="title" value="Titulo" />
             <h:inputText value="#{taskContrller.task.title}"/>
@@ -28,8 +28,8 @@
             <h:selectOneListbox value="#{taskContrller.responsavel}" size="7">
                 <f:selectItems value="#{taskContrller.responsavelItems}"/>
             </h:selectOneListbox>
-            <br/>
-            <h:commandButton  style="margin-left: 40px; "  id="comando" styleClass="btn btn-task" action="#{taskContrller.save()}" value="Salvar"/>
+            
+            <h:commandButton  style="margin-left: 40px;background: #000; position: relative;"  id="comando" styleClass="btn btn-task" action="#{taskContrller.save()}" value="Salvar"/>
         </h:form>
     </ui:define>
 </ui:composition>

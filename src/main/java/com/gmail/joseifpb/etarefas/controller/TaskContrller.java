@@ -65,7 +65,10 @@ public class TaskContrller implements Serializable {
             this.task.setUsermaker(userService.findOn(userSession()));
             this.task.setDeadline(LocalDate.parse(date, formatter));
             searchResponsible();
-            this.taskService.save(this.task, userSession());
+            if (!vavidate(task)) {
+                return null;
+            }
+
             this.task = new Task();
             this.date = "";
             return "list";
@@ -185,6 +188,24 @@ public class TaskContrller implements Serializable {
             return null;
         }
         return null;
+    }
+
+    private boolean vavidate(Task task) {
+
+        try {
+            if (!this.taskService.validateTask(task)) {
+                this.message.addMessage("A a data de enteda não pode ser anteriora a hoje!");
+                return false;
+            }
+            if (this.taskService.save(this.task, userSession())) {
+                return true;
+            } else {
+                this.message.addMessage("Erro verifique os dados e tente novamente");
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

@@ -8,6 +8,7 @@ package com.gmail.joseifpb.etarefas.service;
 import com.gmail.joseifpb.etarefas.entity.Task;
 import com.gmail.joseifpb.etarefas.entity.TtaskStatus;
 import com.gmail.joseifpb.etarefas.repository.TaskRepository;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.EJB;
@@ -25,7 +26,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public boolean save(Task task, Long user_id_session) {
-        System.out.println("sava " + task.getId());
+        if(!validateTask(task))
+            return false;
         try {
             if (task.getId() == null || task.getId() < 1L) {
                 taskRepository.save(task);
@@ -110,6 +112,12 @@ public class TaskServiceImpl implements TaskService {
             return false;
         }
         return false;
+    }
+    @Override
+    public boolean validateTask(Task task) {
+        boolean after = task.getDeadline().isAfter(LocalDate.now());
+        System.out.println("valida data "+after);
+        return after;
     }
 
 }
