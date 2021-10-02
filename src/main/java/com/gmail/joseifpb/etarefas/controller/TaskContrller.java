@@ -8,10 +8,14 @@ package com.gmail.joseifpb.etarefas.controller;
 import com.gmail.joseifpb.etarefas.entity.Priority;
 import com.gmail.joseifpb.etarefas.entity.Task;
 import com.gmail.joseifpb.etarefas.entity.TtaskStatus;
+import com.gmail.joseifpb.etarefas.entity.User;
 import com.gmail.joseifpb.etarefas.service.TaskService;
 import com.gmail.joseifpb.etarefas.service.UserService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -31,29 +35,43 @@ public class TaskContrller {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
     private String date;
     private String priority;
-
+    private String responsavel;
+    private Collection<SelectItem> responsavelItems;
     private Task task;
     private List<Task> tasks;
+    private List<User> users;
     @EJB
     private TaskService taskService;
-     @EJB
+    @EJB
     private UserService userService;
 
     @PostConstruct
     public void init() {
+        this.users = new ArrayList<>();
         this.task = new Task();
     }
 
     public String save() {
-        this.task.setStatus(TtaskStatus.Andamento);
-        System.out.println(priority);
-        this.task.setPriority(Priority.valueOf(priority));
-        this.task.setUsermaker(userService.findOn(userSession()));
-        this.task.setResponsible(userService.findOn(userSession()));
-        this.task.setDeadline(LocalDate.parse(date, formatter));
-          
-        this.taskService.save(this.task);
-        this.task = new Task();
+        try {
+            this.task.setStatus(TtaskStatus.Andamento);
+            this.task.setPriority(Priority.valueOf(priority));
+            this.task.setUsermaker(userService.findOn(userSession()));
+            this.task.setDeadline(LocalDate.parse(date, formatter));
+            searchResponsible();
+            this.taskService.save(this.task);
+            this.task = new Task();
+            return "list";
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    public String edit(Task task){
+        this.task = task;
+        return "edit";
+    }
+    
+    public String remove(Long id){
+        this.taskService.delete(id);
         return null;
     }
 
@@ -64,6 +82,7 @@ public class TaskContrller {
     public void setDate(String date) {
         this.date = date;
     }
+
     public String getPriority() {
         return priority;
     }
@@ -81,6 +100,7 @@ public class TaskContrller {
     }
 
     public List<Task> getTasks() {
+       this.tasks = this.taskService.index();
         return tasks;
     }
 
@@ -92,11 +112,11 @@ public class TaskContrller {
         Long User = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("users");
         return User;
     }
-     private SelectItem[] prioridades = {
-    new SelectItem(Priority.High),
-    new SelectItem(Priority.Low),
-    new SelectItem(Priority.Medium)
-  };
+    private SelectItem[] prioridades = {
+        new SelectItem(Priority.High),
+        new SelectItem(Priority.Low),
+        new SelectItem(Priority.Medium)
+    };
 
     public void setPrioridades(SelectItem[] prioridades) {
         this.prioridades = prioridades;
@@ -105,5 +125,35 @@ public class TaskContrller {
     public SelectItem[] getPrioridades() {
         return prioridades;
     }
-     
+
+    public String getResponsavel() {
+        return responsavel;
+    }
+
+    public void setResponsavel(String responsavel) {
+        this.responsavel = responsavel;
+    }
+
+    public Collection<SelectItem> getResponsavelItems() {
+        this.users = this.userService.index();
+        responsavelItems = new ArrayList<>();
+        for (User user : users) {
+            responsavelItems.add(new SelectItem(user.getName()));
+
+        }
+        return responsavelItems;
+    }
+
+    private User searchResponsible() {
+
+        for (Iterator<User> it = users.iterator(); it.hasNext();) {
+            User user = it.next();
+            if (user.getName().endsWith(responsavel)) {
+                this.task.setResponsible(user);
+                return user;
+            }
+        }
+        return User.fake();
+    }
+
 }

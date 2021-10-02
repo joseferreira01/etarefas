@@ -12,7 +12,7 @@
         ssssssss
         <br/>
         <h:messages layout="list"/>
-        <h:form id="id-forme-login">
+        <h:form id="id-forme-task">
             <h:messages layout="list" />
             <h:outputLabel for="title" value="Titulo" />
             <h:inputText value="#{taskContrller.task.title}"/>
@@ -20,12 +20,16 @@
             <h:inputText value="#{taskContrller.task.description}"/>
             <h:outputLabel for="dedline" value="Data de entrega" />
             <h:inputText value="#{taskContrller.date}"/> 
-           <h:outputText value="Prioridade"/>
-           <h:selectOneMenu value="#{taskContrller.priority}">
+            <h:outputText value="Prioridade"/>
+            <h:selectOneMenu value="#{taskContrller.priority}">
                 <f:selectItems value="#{taskContrller.prioridades}"/>
             </h:selectOneMenu>
+           <h:outputText value="Responsavel:"/>
+            <h:selectOneListbox value="#{taskContrller.responsavel}" size="7">
+                <f:selectItems value="#{taskContrller.responsavelItems}"/>
+            </h:selectOneListbox>
             <br/>
-            <h:commandButton  style="margin-left: 40px; "  id="comando" styleClass="btn" action="#{taskContrller.save()}" value="Salvar"/>
+            <h:commandButton  style="margin-left: 40px; "  id="comando" styleClass="btn btn-task" action="#{taskContrller.save()}" value="Salvar"/>
         </h:form>
     </ui:define>
 </ui:composition>

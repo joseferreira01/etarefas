@@ -7,6 +7,7 @@ package com.gmail.joseifpb.etarefas.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -109,11 +110,17 @@ public class Task implements Serializable {
     }
 
     public LocalDate getDeadline() {
+        
         return deadline;
     }
 
     public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
+    }
+    public String getDateFormat(){ 
+          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+       
+        return deadline.format(formatter);
     }
 
     public User getResponsible() {
