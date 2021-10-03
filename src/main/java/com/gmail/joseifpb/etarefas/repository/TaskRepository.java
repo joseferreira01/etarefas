@@ -21,5 +21,6 @@ public interface TaskRepository {
     void remove(Long id);
 
     Task save(Task user);
+     List<Task> findNyTaskAtribute(Task task);
 
 }

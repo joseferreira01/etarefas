@@ -97,6 +97,11 @@ public class TaskContrller implements Serializable {
             return null;
         }
     }
+    public String findByAttribute(){
+        this.tasks = this.taskService.findNyTaskAtribute(task);
+      this.task = new Task();
+      return null;
+    }
 
     public String getDate() {
         return date;

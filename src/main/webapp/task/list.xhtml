@@ -14,6 +14,10 @@
          <br/>
         <h:form>
             <h:commandLink class="btn" value="nova" action="edit.xhtml?faces-redirect=true"/>
+            <h:outputLabel value="origem"/>
+            <h:inputText value="#{taskContrller.task.title}"/>
+            <h:commandButton value="Buscar" action="#{taskContrller.findByAttribute()}" class="btn"/>
+               
             <h:dataTable var="task" value="#{taskContrller.tasks}" class="striped highlight">
                 <h:column>
                     <f:facet name="header">Titulo</f:facet>

@@ -120,4 +120,9 @@ public class TaskServiceImpl implements TaskService {
         return after;
     }
 
+    @Override
+    public List<Task> findNyTaskAtribute(Task task) {
+        return this.taskRepository.findNyTaskAtribute(task);
+    }
+
 }
