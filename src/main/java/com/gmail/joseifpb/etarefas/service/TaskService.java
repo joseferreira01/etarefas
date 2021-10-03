@@ -25,6 +25,7 @@ public interface TaskService {
     public boolean validateTask(Task task);
 
     boolean delete(Long itask_d, Long maker_id);
+
     List<Task> findNyTaskAtribute(Task task);
 
 }

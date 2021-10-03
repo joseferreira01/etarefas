@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -98,7 +99,9 @@ public class TaskContrller implements Serializable {
         }
     }
     public String findByAttribute(){
-        this.tasks = this.taskService.findNyTaskAtribute(task);
+        tasks= new ArrayList<>();
+        List<Task> dd = this.taskService.findNyTaskAtribute(task);
+        System.out.println("volta "+dd.get(0).getTitle());
       this.task = new Task();
       return null;
     }

@@ -23,10 +23,14 @@
 <nav class="teal lighten-1" role="navigation">
     <div class="nav-wrapper container">
         <a id="logo-container" href="#" class="brand-logo">E-Tarefas </a>
+          <h:form>
+              <h:commandButton style="background: #E53935; margin-left: 110%;" value="Sair" action="#{sessionContrler.logout()}" class="btn"/>
+            <br/>
+        </h:form>
         <ul class="right hide-on-med-and-down">
 
         </ul>
-
+      
         <ul id="nav-mobile" class="sidenav">
             <li><a href=""></a></li>
         </ul>

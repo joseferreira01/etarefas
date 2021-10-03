@@ -6,6 +6,7 @@
 package com.gmail.joseifpb.etarefas.repository;
 
 import com.gmail.joseifpb.etarefas.entity.Task;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -15,6 +16,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+
 
 /**
  *
@@ -62,20 +64,22 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     @Override
     public List<Task> findNyTaskAtribute(Task task) {
-        System.out.println("meu ti "+task.getTitle());
-        try {
+        System.out.println("meu ti " + task.getTitle());
+       try {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
             CriteriaQuery<Task> criteriaQuery = criteriaBuilder.createQuery(Task.class);
             Root<Task> root = criteriaQuery.from(Task.class);
 
             CriteriaQuery<Task> select = criteriaQuery.select(root);
+            criteriaQuery.where(criteriaBuilder.equal(root.get("title"), task.getTitle()));
             TypedQuery<Task> query = em.createQuery(select);
-            List<Task> results = query.getResultList(); 
-            for (Task result : results) {
-                System.out.println("resut q "+result.getTitle());
-            }
+            List<Task> results = new ArrayList<>();
+            Task u = query.getSingleResult();
+            System.out.println("s "+u.getId());
+            results.add(u);
             return results;
+        
         } catch (Exception e) {
             return Collections.EMPTY_LIST;
         }

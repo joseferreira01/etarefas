@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.gmail.joseifpb.etarefas.filter;
+
 import com.gmail.joseifpb.etarefas.entity.User;
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -28,7 +29,6 @@ public class AutorizacaoFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res,
             FilterChain chain) throws IOException, ServletException {
 
-        System.err.println("entro o filtro ID  ");
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
         HttpSession session = request.getSession();
@@ -36,27 +36,27 @@ public class AutorizacaoFilter implements Filter {
         if (request.getRequestURI().endsWith("/faces/index.xhtml")
                 || request.getRequestURI().endsWith("/faces/user/edit.xhtml")
                 || request.getRequestURI()
-                .contains("/javax.faces.img/")) {
-             System.err.println("no if filter");
+                        .contains("/javax.faces.img/")) {
+
             chain.doFilter(req, res);
             // System.err.println("index filtro");
         } else {
             try {
                 user = (Long) session.getAttribute("users");
             } catch (Exception e) {
-                System.err.println("exep filte "+e.getMessage());
-                 response.sendRedirect(request.getContextPath()
-                        + "/faces/index.xhtml");
-            }
-            // System.err.println("passou do filtro com usuario " + user.getNome()+" id "+user.getId());
-            if (user != null) {
-                  
-                chain.doFilter(req, res);
-            } else {
-                // throw new RuntimeException("faça login para ter acesso!");
+
                 response.sendRedirect(request.getContextPath()
                         + "/faces/index.xhtml");
-                System.err.println("else do uuu ");
+            }
+
+            if (user != null) {
+
+                chain.doFilter(req, res);
+            } else {
+
+                response.sendRedirect(request.getContextPath()
+                        + "/faces/index.xhtml");
+
             }
         }
 

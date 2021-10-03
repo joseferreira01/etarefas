@@ -9,7 +9,6 @@ import com.gmail.joseifpb.etarefas.entity.User;
 import com.gmail.joseifpb.etarefas.service.UserService;
 import com.gmail.joseifpb.etarefas.util.Message;
 import java.io.Serializable;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -50,6 +49,13 @@ public class SessionContrler implements Serializable {
         }
          this.message.addMessage("Erro: verifique os dados e tente novamente ");
         return null;
+    }
+    public String logout() {
+       
+        FacesContext.getCurrentInstance().getExternalContext()
+                .invalidateSession();
+
+        return "/faces/index?faces-redirect=true";
     }
 
     public User getUser() {
