@@ -21,32 +21,20 @@
 - ⚡ JSF (JavaServer Faces)
 - JPA (Java Persistence API)
 
-## ✋🏻 Pré-requisitos
+## 🐋 Instalação e execução no Docker
 
+## ✋🏻 Pré-requisitos
+- portas 5433 e 8002 da máquina host liberadas
 - [java ](https://www.java.com/pt-BR/) `Vesão 8 ou superior`
 - [mavem](https://maven.apache.org/) `Vesão 3.8 ou superior`
-- [posgreSQL](https://www.postgresql.org/) `Vesão 10 ou superior`
-- Servido de aplicação nesse exemplo [payara sever](https://www.payara.fish/downloads/payara-platform-community-edition/).  
-
-## 🔥 Instalação e execução no localhost
+- [Docker](https://www.docker.com/) `extensão`[Compose](https://docs.docker.com/compose/) 
 
 1. Faça um clone desse repositório;
-2. Entre na pasta `cd devtop`;
-3. Configure a conexao com o banco `apigithub/src/main/resources/application.properties`
-4. Altere `URL, username e password .
-5.Configure variáveis ambiente:
-- APP_CLAENT_SECRETS
-- APP_CLAENT_ID.
-<p>
-Essas variáveis são necessárias para utilização da API do github https://docs.github.com/pt/enterprise-server@3.0/developers/apps/building-github-apps/creating-a-github-app
-</p>
-
-5. Rode `mvn clean packag` para instalar as dependências e criar o executavel (api.jar);
-6. Rode `java -jar target/api.jar` para iniciar o servidor.
-7. Acesse  [use a api no localhost](http://localhost:8080/api/user)
-8. Documentação [docs](http://localhost:8080/v2/api-docs)
-
-
+2. Entre na pasta `cd /
+etarefas`
+3. Rode `mvn clean packag` para instalar as dependências
+4. Rode `docker-compose up` `(Aguarde um pouco até que o container seja criado)` 
+5. Acesse: [http://localhost:8082/etarefas/](http://localhost:8082/etarefas/)
 
 ## ⚡️ Como contribuir
 
@@ -57,9 +45,6 @@ Essas variáveis são necessárias para utilização da API do github https://do
 
 Depois que o merge da sua pull request for feito, você pode deletar a sua branch.
 
-##  Código do front and 
-- [Aqui ](https://github.com/joseferreira01/devtop-front)
-
 ---
 
-Feito com 💖 by José Ferreira 👋 [Entre na nossa comunidade!](https://github.com/joseferreira01/)
+Feito com 💖 by José Ferreira 👋 [Fale com o criadorgit!](https://github.com/joseferreira01/)

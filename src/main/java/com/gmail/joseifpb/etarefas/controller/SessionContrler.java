@@ -48,7 +48,7 @@ public class SessionContrler implements Serializable {
             return "faces/task/list?faces-redirect=true";
         }
          this.message.addMessage("Erro: verifique os dados e tente novamente ");
-        return null;
+        return "faces/index?faces-redirect=true";
     }
     public String logout() {
        
