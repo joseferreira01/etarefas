@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+ db:
+  build: ./banco
+  image: etarefas/banco
+  container_name: banco
+  ports: 
+    - "5433:5432"
+ web:
+  build: .
+  image: etarefas/app
+  container_name: app
+  ports: 
+    - "8082:8080" 
+  external_links: 
+    - db    

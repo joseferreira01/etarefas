@@ -101,7 +101,7 @@ public class TaskContrller implements Serializable {
     public String findByAttribute(){
         tasks= new ArrayList<>();
         List<Task> dd = this.taskService.findNyTaskAtribute(task);
-        System.out.println("volta "+dd.get(0).getTitle());
+        
       this.task = new Task();
       return null;
     }
