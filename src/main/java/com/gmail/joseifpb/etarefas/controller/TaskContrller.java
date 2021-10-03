@@ -144,9 +144,9 @@ public class TaskContrller implements Serializable {
         return User;
     }
     private SelectItem[] prioridades = {
-        new SelectItem(Priority.High),
-        new SelectItem(Priority.Low),
-        new SelectItem(Priority.Medium)
+        new SelectItem(Priority.media),
+        new SelectItem(Priority.Alta),
+        new SelectItem(Priority.Baixa)
     };
 
     public void setPrioridades(SelectItem[] prioridades) {

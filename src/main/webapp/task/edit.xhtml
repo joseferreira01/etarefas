@@ -9,27 +9,36 @@
 
 
     <ui:define name="centro">
-        
+
         <br/>
         <h:messages layout="list" style="padding: -10%"/>
-        <h:form id="id-forme-task" style=" margin-top:39px ;padding: -10%; height: 800px; position: ">
+        <h:form id="id-forme-task" class="focus" style=" margin-top:39px ;padding: -10%; height: 1000px; position: ">
             <h:messages layout="list" />
-            <h:outputLabel for="title" value="Titulo" />
-            <h:inputText value="#{taskContrller.task.title}"/>
-            <h:outputLabel for="descripition" value="descrição" />
-            <h:inputText value="#{taskContrller.task.description}"/>
-            <h:outputLabel for="dedline" value="Data de entrega" />
-            <h:inputText value="#{taskContrller.date}"/> 
             <h:outputText value="Prioridade"/>
             <h:selectOneMenu value="#{taskContrller.priority}">
                 <f:selectItems value="#{taskContrller.prioridades}"/>
             </h:selectOneMenu>
-           <h:outputText value="Responsavel:"/>
+            <h:outputText value="Responsavel:"/>
             <h:selectOneListbox value="#{taskContrller.responsavel}" size="7">
                 <f:selectItems value="#{taskContrller.responsavelItems}"/>
             </h:selectOneListbox>
             
-            <h:commandButton  style="margin-left: 40px;background: #000; position: relative;"  id="comando" styleClass="btn btn-task" action="#{taskContrller.save()}" value="Salvar"/>
+            
+            <h:inputText value="#{taskContrller.task.title}">
+                 <f:passThroughAttribute name="placeholder" value="Digite o titulo da tarefa" />
+            </h:inputText>
+           
+            <h:inputText value="#{taskContrller.task.description}">
+                <f:passThroughAttribute name="placeholder" value="Digite uma descriçao" />
+            </h:inputText>
+            
+            <h:inputText value="#{taskContrller.date}">
+                <f:passThroughAttribute  class="ggg" name="placeholder" value="Dara de entrega ex: 99/99/9999" />
+            </h:inputText>
+           
+
+
+            <h:commandButton  style="margin-left: 1%;"  id="comando" styleClass="btn btn-task" action="#{taskContrller.save()}" value="Salvar"/>
         </h:form>
     </ui:define>
 </ui:composition>

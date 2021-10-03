@@ -36,22 +36,29 @@ public class SessionContrler implements Serializable {
     }
 
     public String login() {
-       user = this.userService.login(user.getEmail(), user.getPassword());
-        if (user.getId() > -1L) {
-            FacesContext.getCurrentInstance().
-                    getExternalContext().
-                    getSessionMap().
-                    put("users", user.getId());
-            this.message.addMessage("Bem vindo " + user.getName() + "!");
-            this.user = new User();
-          
-            return "faces/task/list?faces-redirect=true";
+        user = this.userService.login(user.getEmail(), user.getPassword());
+        try {
+            if (user.getId() > -1L) {
+                FacesContext.getCurrentInstance().
+                        getExternalContext().
+                        getSessionMap().
+                        put("users", user.getId());
+                this.message.addMessage("Bem vindo " + user.getName() + "!");
+                this.user = new User();
+
+                return "faces/task/list?faces-redirect=true";
+            }
+
+        } catch (Exception e) {
+            this.message.addMessage("Erro: verifique os dados e tente novamente ");
+            return "faces/index?faces-redirect=true";
         }
          this.message.addMessage("Erro: verifique os dados e tente novamente ");
-        return "faces/index?faces-redirect=true";
+            return "faces/index?faces-redirect=true";
     }
+
     public String logout() {
-       
+
         FacesContext.getCurrentInstance().getExternalContext()
                 .invalidateSession();
 
@@ -65,6 +72,5 @@ public class SessionContrler implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-    
 
 }

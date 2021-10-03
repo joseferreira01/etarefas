@@ -37,12 +37,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String email, String password) {
-        User user = this.userRepository.findByEmail(email);
+        try {
+             User user = this.userRepository.findByEmail(email);
         if (user != null && user.getPassword().equals(Criptografar.hashPassword(password))) {
             return user;
         } else {
             return User.fake();
         }
+        } catch (Exception e) {
+             return User.fake();
+        }
+       
     }
 
     @Override

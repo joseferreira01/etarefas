@@ -10,5 +10,5 @@ package com.gmail.joseifpb.etarefas.entity;
  * @author jose
  */
 public enum Priority {
-    Low, High, Medium;
+    Alta, media, Baixa;
 }
