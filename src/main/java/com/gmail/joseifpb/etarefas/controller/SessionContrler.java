@@ -29,6 +29,7 @@ public class SessionContrler implements Serializable {
     private User user;
     @Inject
     private Message message;
+    private boolean isLogado = false;
 
     @PostConstruct
     public void init() {
@@ -45,7 +46,9 @@ public class SessionContrler implements Serializable {
                         put("users", user.getId());
                 this.message.addMessage("Bem vindo " + user.getName() + "!");
                 this.user = new User();
-
+                System.out.println("is logado "+isLogado);
+                this.isLogado = true;
+                System.out.println("is logado iii "+isLogado);
                 return "faces/task/list?faces-redirect=true";
             }
 
@@ -53,16 +56,21 @@ public class SessionContrler implements Serializable {
             this.message.addMessage("Erro: verifique os dados e tente novamente ");
             return "faces/index?faces-redirect=true";
         }
-         this.message.addMessage("Erro: verifique os dados e tente novamente ");
-            return "faces/index?faces-redirect=true";
+        this.message.addMessage("Erro: verifique os dados e tente novamente ");
+        return "faces/index?faces-redirect=true";
     }
 
     public String logout() {
 
         FacesContext.getCurrentInstance().getExternalContext()
                 .invalidateSession();
+        this.isLogado = false;
 
         return "/faces/index?faces-redirect=true";
+    }
+
+    public boolean isIsLogado() {
+        return isLogado;
     }
 
     public User getUser() {
