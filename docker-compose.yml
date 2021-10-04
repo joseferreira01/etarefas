@@ -8,9 +8,12 @@ services:
     - "5433:5432"
  web:
   build: .
+  depends_on: 
+   - db
   image: etarefas/app
   container_name: app
   ports: 
-    - "8082:8080" 
+    - "8080:8080" 
   external_links: 
     - db    
+  restart: on-failure
