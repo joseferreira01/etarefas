@@ -24,7 +24,7 @@
 ## 🐋 Instalação e execução no Docker
 
 ## ✋🏻 Pré-requisitos
-- portas 5433 e 8002 da máquina host liberadas
+- portas 5433 e 8082 da máquina host liberadas
 - [java ](https://www.java.com/pt-BR/) `Vesão 8 ou superior`
 - [mavem](https://maven.apache.org/) `Vesão 3.8 ou superior`
 - [Docker](https://www.docker.com/) `extensão`[Compose](https://docs.docker.com/compose/) 
