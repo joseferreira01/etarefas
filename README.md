@@ -30,8 +30,7 @@
 - [Docker](https://www.docker.com/) `extensão`[Compose](https://docs.docker.com/compose/) 
 
 1. Faça um clone desse repositório;
-2. Entre na pasta `cd /
-etarefas`
+2. Entre na pasta `cd etarefas`
 3. Rode `mvn clean packag` para instalar as dependências
 4. Rode `docker-compose up` `(Aguarde um pouco até que o container seja criado)` 
 5. Acesse: [http://localhost:8082/etarefas/](http://localhost:8082/etarefas/)
